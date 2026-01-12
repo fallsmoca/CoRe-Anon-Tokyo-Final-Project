@@ -68,4 +68,4 @@ python test_llm_format.py
 p.s. 我们的demo存储在demo文件夹下的demo_new.html中，该文件夹下的generate_viz.py能将rounds.json改成demo的格式
 
 这是我们的demo的一个截屏：
-！[demo](docs/resources/demo.png)
+![demo](docs/resources/demo.png)
