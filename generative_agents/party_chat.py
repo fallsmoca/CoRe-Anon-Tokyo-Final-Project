@@ -14,10 +14,10 @@ from modules import utils
 
 # 语言涌现实验的四个核心角色
 EXPERIMENT_PERSONAS = [
-    "伊莎贝拉",  # Isabella - 咖啡馆老板
-    "玛丽亚",    # Maria - 学生
-    "卡门",      # Carmen - 供应店主人
-    "塔玛拉",    # Tamara - 儿童读物作家
+    "伊莎贝拉", 
+    "玛丽亚",    
+    "卡门",      
+    "塔玛拉",    
 ]
 
 
@@ -361,6 +361,22 @@ class LanguageEmergenceChat:
         # 保存理解数据
         self.understanding_data.extend(understanding_records)
         
+        # [同步到全局对话记录] 仅保留纯粹的对话内容（说话人、听话人、内容）
+        for entry in conversation_history:
+            # conversation key 通常格式: "speaker:listener" 或者只是个时间戳列表
+            # 这里我们简单地追加到全局列表中，如果不匹配原格式可能需要调整
+            # 假设 game.conversation 是一个列表或者简单的字典结构
+            
+            # 使用时间戳作为key，确保唯一
+            chat_key = entry['time']
+            clean_entry = {
+                "speaker": entry['speaker'],
+                "listener": entry['listener'],
+                "content": entry['chinese'], # 仅保留中文内容（翻译后的）作为可读内容
+                "novlang_original": entry['novlang'] # 保留原文
+            }
+            self.game.conversation[chat_key] = clean_entry
+
         return {
             "round": round_num,
             "timestamp": timer.get_date("%Y%m%d-%H%M%S"),
@@ -388,19 +404,19 @@ class LanguageEmergenceChat:
         with open(self.dialogue_summary_log, "w", encoding="utf-8") as f:
             json.dump(self.dialogue_summary, indent=2, ensure_ascii=False, fp=f)
         
-        # 保存检查点
-        checkpoint = {
-            "experiment_name": self.name,
-            "current_round": current_round,
-            "total_conversations": len(self.rounds_data),
-            "total_understanding_records": len(self.understanding_data),
-            "agents": self.agents,
-            "timestamp": datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        }
+        # 保存检查点 - 已移除单个checkpoint文件的保存, 只保留累计数据
+        # checkpoint = {
+        #     "experiment_name": self.name,
+        #     "current_round": current_round,
+        #     "total_conversations": len(self.rounds_data),
+        #     "total_understanding_records": len(self.understanding_data),
+        #     "agents": self.agents,
+        #     "timestamp": datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        # }
         
-        checkpoint_file = f"{self.checkpoints_folder}/checkpoint-round-{current_round}.json"
-        with open(checkpoint_file, "w", encoding="utf-8") as f:
-            json.dump(checkpoint, indent=2, ensure_ascii=False, fp=f)
+        # checkpoint_file = f"{self.checkpoints_folder}/checkpoint-round-{current_round}.json"
+        # with open(checkpoint_file, "w", encoding="utf-8") as f:
+        #     json.dump(checkpoint, indent=2, ensure_ascii=False, fp=f)
         
         self.logger.info(f"✓ 进度已保存 (Round {current_round})")
     
