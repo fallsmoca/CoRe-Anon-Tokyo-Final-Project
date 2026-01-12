@@ -69,3 +69,5 @@ Parameter Description
 - `inject-round` - The round to inject foreign words, i.e., in which round to introduce foreign words (optional).
 
 P.S. Our demo is stored in the file demo_new.html under the demo folder, and the generate_viz.py file in this folder can convert rounds.json into the format required by the demo.
+
+![demo](docs/resources/demo.png)
