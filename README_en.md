@@ -6,15 +6,9 @@ Language Emergence Experiment of Anon Tokyo
 ---
 Overview
 
-Stanford AI Town, open-sourced by Stanford University and Google in August 2023, is a virtual world composed of 25 intelligent agents that simulates real human life.
+Stanford AI Town, open-sourced by Stanford University and Google in August 2023, is a virtual world composed of 25 intelligent agents that simulates real human life. These 25 agents are entirely powered by ChatGPT, capable of independently organizing parties, attending meetings, and arranging various activities for Valentine's Day. They can exhibit life patterns and behavioral habits similar to human beings.
 
-These 25 agents are entirely powered by ChatGPT, capable of independently organizing parties, attending meetings, and arranging various activities for Valentine's Day. They can exhibit life patterns and behavioral habits similar to human beings.
-
-The original code of Generative Agents has a low level of engineering, making it difficult to maintain continuously or expand functions. Moreover, two years later, the capabilities of Chinese LLMs (Large Language Models) are already competent for such tasks. Based on the refactored and deeply localized Chinese versionGenerativeAgentsCn of the original project, we conducted a language emergence experiment with our own refactored version.
-
-
----
-Main Work
+Based on the original project, we conducted a language emergence experiment with our own refactored version.
 
 1. Preparation
 
