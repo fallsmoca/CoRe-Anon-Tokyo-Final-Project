@@ -1,0 +1,202 @@
+[
+  {
+    "round": 1,
+    "timestamp": "20240213-100000",
+    "conversations": [
+      {
+        "round": 1,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:00:00",
+        "content": "！·●·↔·△：派对·∝：17:00",
+        "translation": "快来参加派对，下午5点开始"
+      },
+      {
+        "round": 1,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:00:00",
+        "content": "♡·⊗·△·→·⊕",
+        "translation": "开心的情绪融入群体带来能量"
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "timestamp": "20240213-100500",
+    "conversations": [
+      {
+        "round": 2,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:05:00",
+        "content": "♡·⊗·△·→·⊕",
+        "translation": "开心的情绪融入群体带来能量"
+      },
+      {
+        "round": 2,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:05:00",
+        "content": "？·●·↔·△：故事",
+        "translation": "要不要讨论新故事的创作？"
+      }
+    ]
+  },
+  {
+    "round": 3,
+    "timestamp": "20240213-101000",
+    "conversations": [
+      {
+        "round": 3,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:10:00",
+        "content": "！·●·→·□·：派对·∝：17:00",
+        "translation": "请来参加派对，下午5点开始"
+      },
+      {
+        "round": 3,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:10:00",
+        "content": "♡·⊗·△·→·⊕",
+        "translation": "开心的情绪融入群体带来能量"
+      }
+    ]
+  },
+  {
+    "round": 4,
+    "timestamp": "20240213-101500",
+    "conversations": [
+      {
+        "round": 4,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:15:00",
+        "content": "？·●·—·□·：直播",
+        "translation": "要不要一起开始直播？"
+      },
+      {
+        "round": 4,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:15:00",
+        "content": "○·⊗·△·→·⊕",
+        "translation": "自然融合群体产生能量"
+      }
+    ]
+  },
+  {
+    "round": 5,
+    "timestamp": "20240213-102000",
+    "conversations": [
+      {
+        "round": 5,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:20:00",
+        "content": "！·●·→·□·：派对·∝：17:00",
+        "translation": "请来参加派对，下午5点开始"
+      },
+      {
+        "round": 5,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:20:00",
+        "content": "♡·⊗·△·→·⊕",
+        "translation": "开心的情绪融入群体带来能量"
+      }
+    ]
+  },
+  {
+    "round": 6,
+    "timestamp": "20240213-102500",
+    "conversations": [
+      {
+        "round": 6,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:25:00",
+        "content": "？·●·↔·△·：网店",
+        "translation": "要不要一起处理网店的事？"
+      },
+      {
+        "round": 6,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:25:00",
+        "content": "♡·⊗·△·→·⊕",
+        "translation": "愉快的情绪融入群体带来能量"
+      }
+    ]
+  },
+  {
+    "round": 7,
+    "timestamp": "20240213-103000",
+    "conversations": [
+      {
+        "round": 7,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:30:00",
+        "content": "！·●·→·□·：派对·∝：17:00",
+        "translation": "请来参加派对，下午5点开始"
+      },
+      {
+        "round": 7,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:30:00",
+        "content": "(♡⊗△)·→·□·：派对",
+        "translation": "愉快的情绪融入群体导致活动"
+      }
+    ]
+  },
+  {
+    "round": 8,
+    "timestamp": "20240213-103500",
+    "conversations": [
+      {
+        "round": 8,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:35:00",
+        "content": "？·●·↔·△·：咖啡馆",
+        "translation": "要不要去咖啡馆和大家聊聊"
+      },
+      {
+        "round": 8,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:35:00",
+        "content": "●·↔·△：咖啡馆·→·⊕",
+        "translation": "在咖啡馆互动产生创作能量"
+      }
+    ]
+  },
+  {
+    "round": 9,
+    "timestamp": "20240213-104000",
+    "conversations": [
+      {
+        "round": 9,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:40:00",
+        "content": "！·●·→·□·：派对·∝：17:00",
+        "translation": "请来参加派对，下午5点开始"
+      },
+      {
+        "round": 9,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:40:00",
+        "content": "♡·⊗·△·→·⊕·：17:00",
+        "translation": "我将参与派对，下午5点"
+      }
+    ]
+  },
+  {
+    "round": 10,
+    "timestamp": "20240213-104500",
+    "conversations": [
+      {
+        "round": 10,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:45:00",
+        "content": "♡·⊗·△·→·□·：网店",
+        "translation": "让我们一起处理网店事务，合作产生能量"
+      },
+      {
+        "round": 10,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:45:00",
+        "content": "♡·⊗·△·→·□：网店·⊕",
+        "translation": "通过情绪融入群体产生能量：网店"
+      }
+    ]
+  }
+]

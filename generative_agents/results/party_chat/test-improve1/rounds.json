@@ -1,0 +1,242 @@
+[
+  {
+    "round": 1,
+    "timestamp": "20240213-100000",
+    "conversations": [
+      {
+        "round": 1,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:00:00",
+        "content": "♡●→△：羽泽咖啡馆，2/14 17:00",
+        "translation": "塔玛拉，今晚在羽泽咖啡馆，我们庆祝情人节，一起分享快乐",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 1,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:00:00",
+        "content": "♡●→△：羽泽咖啡馆，2/14 17:00‖□⊃→△：羽泽咖啡馆，2/14 17:00",
+        "translation": "我接受邀请，但需要先完成故事草稿，之后和卡门一起去。",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "timestamp": "20240213-100500",
+    "conversations": [
+      {
+        "round": 2,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:05:00",
+        "content": "♡●→□：羽泽咖啡馆",
+        "translation": "我想和你一起去羽泽咖啡馆，分享今日的计划",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 2,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:05:00",
+        "content": "⊕○→□：直播准备",
+        "translation": "我正在准备直播，需要补充能量",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 3,
+    "timestamp": "20240213-101000",
+    "conversations": [
+      {
+        "round": 3,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:10:00",
+        "content": "♡→□：羽泽，2/14 17-19",
+        "translation": "邀请你参加羽泽咖啡馆的情人节派对，时间是2月14日下午5点至7点。",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 3,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:10:00",
+        "content": "△→：羽泽，2/14 17-19 ⊗ ？",
+        "translation": "△→：羽泽，2/14 17-19 ⊗ ？",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 4,
+    "timestamp": "20240213-101500",
+    "conversations": [
+      {
+        "round": 4,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:15:00",
+        "content": "♡≠△∟→⊄",
+        "translation": "你的直播让故事失去想象的边界，用△的集体创造力代替∟的单向输出吧",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 4,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:15:00",
+        "content": "♡⊕→○△⊗",
+        "translation": "清晨的活力与你共享，想探讨量子纠缠的奇妙吗？",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 5,
+    "timestamp": "20240213-102000",
+    "conversations": [
+      {
+        "round": 5,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:20:00",
+        "content": "♡→△□：羽泽咖啡馆·17:00",
+        "translation": "塔玛拉，情人节派对在羽泽咖啡馆下午5点，期待你的到来！",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 5,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:20:00",
+        "content": "⊕→♡□：羽泽咖啡馆·∝→17:00",
+        "translation": "故事能量正在羽泽咖啡馆的容器中流动，需要我加入吗？",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 6,
+    "timestamp": "20240213-102500",
+    "conversations": [
+      {
+        "round": 6,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:25:00",
+        "content": "♡●⊗：玛丽亚∟→：网店",
+        "translation": "我正在整理网店订单，想听听你对新商品包装的建议，用♡●⊗：玛丽亚",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 6,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:25:00",
+        "content": "⊕∇：羽泽咖啡馆‖→：直播计划",
+        "translation": "⊕∇：羽泽咖啡馆‖→：直播计划",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 7,
+    "timestamp": "20240213-103000",
+    "conversations": [
+      {
+        "round": 7,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:30:00",
+        "content": "♡●→△□：羽泽咖啡馆·2/14·17:00",
+        "translation": "邀请你共享情人节的温暖时刻",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 7,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:30:00",
+        "content": "○→△□·∇→2/14",
+        "translation": "我打算去，但得先整理店铺，今晚能一起吗？",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 8,
+    "timestamp": "20240213-103500",
+    "conversations": [
+      {
+        "round": 8,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:35:00",
+        "content": "♡：玛丽亚 ∞ ⊃ ∅ · △：创作 ⊗ ∇",
+        "translation": "玛丽亚，你的直播是否影响休息？用符号表达关心",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 8,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:35:00",
+        "content": "⊕：能量 → △：群体 ⊗ ∇",
+        "translation": "用能量连接群体，构建秩序",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 9,
+    "timestamp": "20240213-104000",
+    "conversations": [
+      {
+        "round": 9,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:40:00",
+        "content": "♡：羽泽咖啡馆→2月14日 ⊃ ●：装饰材料·≈70% ∝",
+        "translation": "羽泽咖啡馆的情人节派对需要你的帮助，△：装饰材料已准备≈70%",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 9,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:40:00",
+        "content": "△：故事角色·○→∇：卡门·‖♡：羽泽咖啡馆⊗●：装饰材料≈70%∝",
+        "translation": "塔玛拉用Novlang符号语言回应伊莎贝拉关于咖啡馆和装饰材料的对话，结合她作为儿童作家的创作视角，将装饰材料与故事角色设计联系起来，并提及与卡门的日常互动。",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  },
+  {
+    "round": 10,
+    "timestamp": "20240213-104500",
+    "conversations": [
+      {
+        "round": 10,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:45:00",
+        "content": "●→△：玛丽亚 ⊗ ⊕‖∇：网店",
+        "translation": "我刚整理完店铺，想和你讨论网店的新计划。",
+        "understanding": "",
+        "thinking": ""
+      },
+      {
+        "round": 10,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:45:00",
+        "content": "○→△：直播室 ⊗ ♡‖∝：量子力学",
+        "translation": "玛丽亚用○→△表示自己从自然状态转向群体互动，同时用♡⊗表达对探索新知识的热忱",
+        "understanding": "",
+        "thinking": ""
+      }
+    ]
+  }
+]

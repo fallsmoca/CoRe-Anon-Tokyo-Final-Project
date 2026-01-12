@@ -1,0 +1,394 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .conversation-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+  }
+
+  .conversation-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 20px;
+  }
+
+  .conversation-header h1 {
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+
+  .conversation-header p {
+    color: #666;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .message-group {
+    display: flex;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .message-avatar {
+    flex-shrink: 0;
+    margin-right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .message-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .message-speaker {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  .message-bubble {
+    background-color: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+    border-left: 4px solid #667eea;
+  }
+
+  .message-symbol {
+    color: #2c3e50;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    word-break: break-all;
+    background-color: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #e0e0e0;
+  }
+
+  .message-translation {
+    color: #666;
+    font-size: 13px;
+    font-style: italic;
+    padding-left: 8px;
+    border-left: 3px solid #90caf9;
+    margin-left: 0;
+    padding: 8px 12px;
+    background-color: #e3f2fd;
+    border-radius: 6px;
+  }
+
+  .message-bubble:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  .emoji-avatar {
+    font-size: 24px;
+    background: none;
+    box-shadow: none;
+  }
+
+  .no-conversations {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+    font-size: 16px;
+  }
+
+  .conversation-meta {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+  }
+
+  .filter-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .filter-section label {
+    margin-right: 10px;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .filter-section select,
+  .filter-section button {
+    padding: 8px 12px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .filter-section button {
+    background-color: #667eea;
+    color: white;
+    border: none;
+  }
+
+  .filter-section button:hover {
+    background-color: #764ba2;
+  }
+</style>
+
+<div class="conversation-container">
+  <div class="conversation-header">
+    <h1>🗣️ 符号语言对话记录</h1>
+    <p>Novlang 对话可视化 | 实时显示 agents 之间的交互</p>
+  </div>
+
+  <div class="filter-section">
+    <label for="timeFilter">选择时间段：</label>
+    <select id="timeFilter">
+      <option value="">所有对话</option>
+    </select>
+    <label for="agentFilter">筛选角色：</label>
+    <select id="agentFilter">
+      <option value="">所有角色</option>
+    </select>
+    <button onclick="loadConversations()">刷新</button>
+  </div>
+
+  <div id="chat-container" class="chat-messages">
+    <div class="no-conversations">加载中...</div>
+  </div>
+</div>
+
+<script>
+  // 颜色映射
+  const colorMap = {
+    '卡门': '#ff6b6b',
+    '塔玛拉': '#4ecdc4',
+    '玛丽亚': '#45b7d1',
+    '伊莎贝拉': '#f9ca24',
+  };
+
+  // Emoji 映射
+  const emojiMap = {
+    '卡门': '👩',
+    '塔玛拉': '👨',
+    '玛丽亚': '👩‍🦰',
+    '伊莎贝拉': '👱‍♀️',
+  };
+
+  // 获取颜色
+  function getColor(name) {
+    if (colorMap[name]) return colorMap[name];
+    const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const hue = hash % 360;
+    return `hsl(${hue}, 70%, 60%)`;
+  }
+
+  // 获取 emoji
+  function getEmoji(name) {
+    return emojiMap[name] || '👤';
+  }
+
+  // 从后端加载对话数据
+  async function loadConversations() {
+    try {
+      const response = await fetch('/api/conversations');
+      const data = await response.json();
+      
+      if (!data || !data.conversations || Object.keys(data.conversations).length === 0) {
+        document.getElementById('chat-container').innerHTML = 
+          '<div class="no-conversations">暂无对话数据</div>';
+        return;
+      }
+
+      // 填充时间过滤器
+      const timeFilter = document.getElementById('timeFilter');
+      const currentOptions = Array.from(timeFilter.options).map(opt => opt.value);
+      Object.keys(data.conversations).forEach(time => {
+        if (!currentOptions.includes(time) && time !== '') {
+          const option = document.createElement('option');
+          option.value = time;
+          option.textContent = time;
+          timeFilter.appendChild(option);
+        }
+      });
+
+      // 填充角色过滤器
+      const agentFilter = document.getElementById('agentFilter');
+      const currentAgents = Array.from(agentFilter.options).map(opt => opt.value);
+      const allAgents = new Set();
+      Object.values(data.conversations).forEach(convList => {
+        convList.forEach(conv => {
+          Object.keys(conv).forEach(key => {
+            const match = key.match(/(\S+)\s*→\s*(\S+)/);
+            if (match) {
+              allAgents.add(match[1]);
+              allAgents.add(match[2]);
+            }
+          });
+        });
+      });
+
+      allAgents.forEach(agent => {
+        if (!currentAgents.includes(agent)) {
+          const option = document.createElement('option');
+          option.value = agent;
+          option.textContent = agent;
+          agentFilter.appendChild(option);
+        }
+      });
+
+      renderConversations(data);
+    } catch (error) {
+      console.error('加载对话失败:', error);
+      document.getElementById('chat-container').innerHTML = 
+        '<div class="no-conversations">加载对话数据失败</div>';
+    }
+  }
+
+  // 渲染对话
+  function renderConversations(data) {
+    const timeFilter = document.getElementById('timeFilter').value;
+    const agentFilter = document.getElementById('agentFilter').value;
+    const container = document.getElementById('chat-container');
+    container.innerHTML = '';
+
+    let hasConversations = false;
+
+    // 遍历所有对话
+    Object.entries(data.conversations).forEach(([time, convList]) => {
+      // 如果有时间过滤，跳过不匹配的
+      if (timeFilter && time !== timeFilter) return;
+
+      convList.forEach(convObj => {
+        Object.entries(convObj).forEach(([key, chatHistory]) => {
+          if (!chatHistory || !Array.isArray(chatHistory)) return;
+
+          // 解析说话者信息
+          const match = key.match(/(\S+)\s*→\s*(\S+)\s*@\s*(.+)/);
+          if (!match) return;
+
+          const [, speaker1, speaker2, location] = match;
+
+          // 如果有角色过滤，检查是否匹配
+          if (agentFilter && speaker1 !== agentFilter && speaker2 !== agentFilter) return;
+
+          hasConversations = true;
+
+          // 创建对话组标题
+          const groupHeader = document.createElement('div');
+          groupHeader.style.cssText = `
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+            color: #666;
+            font-size: 12px;
+          `;
+          groupHeader.innerHTML = `
+            <strong>${time}</strong> | ${speaker1} ↔ ${speaker2} @ ${location}
+          `;
+          container.appendChild(groupHeader);
+
+          // 渲染每条消息
+          chatHistory.forEach((message, index) => {
+            if (!Array.isArray(message) || message.length < 2) return;
+
+            const [speaker, text, translation] = message;
+            const messageGroup = document.createElement('div');
+            messageGroup.className = 'message-group';
+            messageGroup.style.animationDelay = `${index * 0.1}s`;
+
+            // 头像
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar emoji-avatar';
+            avatar.style.backgroundColor = getColor(speaker);
+            avatar.textContent = getEmoji(speaker);
+
+            // 内容
+            const content = document.createElement('div');
+            content.className = 'message-content';
+
+            const speaker_name = document.createElement('div');
+            speaker_name.className = 'message-speaker';
+            speaker_name.style.color = getColor(speaker);
+            speaker_name.textContent = speaker;
+
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            bubble.style.borderLeftColor = getColor(speaker);
+
+            const symbolDiv = document.createElement('div');
+            symbolDiv.className = 'message-symbol';
+            symbolDiv.textContent = text;
+
+            const translationDiv = document.createElement('div');
+            translationDiv.className = 'message-translation';
+            translationDiv.innerHTML = `📝 翻译：${translation || '（无翻译）'}`;
+
+            bubble.appendChild(symbolDiv);
+            bubble.appendChild(translationDiv);
+
+            content.appendChild(speaker_name);
+            content.appendChild(bubble);
+
+            messageGroup.appendChild(avatar);
+            messageGroup.appendChild(content);
+
+            container.appendChild(messageGroup);
+          });
+        });
+      });
+    });
+
+    if (!hasConversations) {
+      container.innerHTML = '<div class="no-conversations">没有找到匹配的对话</div>';
+    }
+  }
+
+  // 页面加载时获取数据
+  window.addEventListener('load', loadConversations);
+
+  // 定期刷新（每5秒）
+  setInterval(loadConversations, 5000);
+</script>
+
+{% endblock content %}

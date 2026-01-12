@@ -1,0 +1,1631 @@
+{
+  "stride": 3,
+  "time": "20240213-11:12",
+  "maze": {
+    "path": "assets\\village\\maze.json"
+  },
+  "agent_base": {
+    "percept": {
+      "mode": "box",
+      "vision_r": 30,
+      "att_bandwidth": 20
+    },
+    "schedule": {
+      "max_try": 5,
+      "diversity": 5
+    },
+    "think": {
+      "llm": {
+        "provider": "ollama",
+        "model": "qwen3:8b-q4_K_M",
+        "base_url": "http://127.0.0.1:11434/v1",
+        "api_key": ""
+      },
+      "interval": 500,
+      "poignancy_max": 150
+    },
+    "chat_iter": 10,
+    "associate": {
+      "embedding": {
+        "provider": "hugging_face",
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "retention": 12
+    }
+  },
+  "agents": {
+    "伊莎贝拉": {
+      "config_path": "assets\\village\\agents\\伊莎贝拉\\agent.json",
+      "status": {
+        "poignancy": 0
+      },
+      "schedule": {
+        "create": "20240213-09:30:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "起床",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "整理咖啡馆",
+            "start": 420,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "开放霍布斯咖啡馆",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "与客人聊天",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理聊天记录",
+                "start": 588,
+                "duration": 6
+              },
+              {
+                "idx": 1,
+                "describe": "塔玛拉与伊莎贝拉分析咖啡馆内座位布局",
+                "start": 594,
+                "duration": 4
+              },
+              {
+                "idx": 2,
+                "describe": "观察客人互动模式",
+                "start": 598,
+                "duration": 2
+              }
+            ]
+          },
+          {
+            "idx": 10,
+            "describe": "语言涌现实验讨论",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "伊莎贝拉将钢琴转化为加密，卡门将加密导向时间轴。",
+                "start": 657,
+                "duration": 0
+              },
+              {
+                "idx": 1,
+                "describe": "系统稳定性检查与冗余校验（压缩原时间长度，确保加密流程闭环）",
+                "start": 657,
+                "duration": 2
+              },
+              {
+                "idx": 2,
+                "describe": "项目阶段总结与下一周期规划（同步团队进度，预留5分钟缓冲时间）",
+                "start": 659,
+                "duration": 1
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "与客人聊天",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理咖啡馆桌椅",
+                "start": 669,
+                "duration": 10
+              },
+              {
+                "idx": 1,
+                "describe": "与玛丽亚讨论符号语言演化",
+                "start": 679,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "检查咖啡机运行状态",
+                "start": 689,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "与卡门探讨实验反馈",
+                "start": 699,
+                "duration": 10
+              },
+              {
+                "idx": 4,
+                "describe": "为塔玛拉准备专属符号板",
+                "start": 709,
+                "duration": 11
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "与客人共进午餐",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 13,
+            "describe": "与客人聊天",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "与客人聊天",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "符号语言交流会",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "与客人聊天",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "与客人聊天",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "小型语言实验讨论",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "与客人聊天",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "与客人聊天",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "与客人聊天",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "与客人聊天",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "睡觉",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_92",
+            "node_90",
+            "node_89",
+            "node_88",
+            "node_86",
+            "node_85",
+            "node_84",
+            "node_82",
+            "node_81",
+            "node_80",
+            "node_78",
+            "node_77",
+            "node_76",
+            "node_74",
+            "node_73",
+            "node_71",
+            "node_70",
+            "node_69",
+            "node_68",
+            "node_67",
+            "node_66",
+            "node_64",
+            "node_63",
+            "node_62",
+            "node_61",
+            "node_60",
+            "node_59",
+            "node_57",
+            "node_56",
+            "node_55",
+            "node_54",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_30",
+            "node_29",
+            "node_27",
+            "node_26",
+            "node_24",
+            "node_23",
+            "node_22",
+            "node_21",
+            "node_20",
+            "node_19",
+            "node_17",
+            "node_16",
+            "node_15",
+            "node_13",
+            "node_12",
+            "node_11",
+            "node_10",
+            "node_9",
+            "node_7",
+            "node_6",
+            "node_5",
+            "node_3",
+            "node_2",
+            "node_1"
+          ],
+          "thought": [
+            "node_109",
+            "node_108",
+            "node_107",
+            "node_106",
+            "node_105",
+            "node_104",
+            "node_103",
+            "node_102",
+            "node_101",
+            "node_100",
+            "node_99",
+            "node_98",
+            "node_97",
+            "node_96",
+            "node_95",
+            "node_94",
+            "node_93",
+            "node_53",
+            "node_52",
+            "node_51",
+            "node_50",
+            "node_49",
+            "node_48",
+            "node_47",
+            "node_46",
+            "node_45",
+            "node_44",
+            "node_43",
+            "node_42",
+            "node_41",
+            "node_40",
+            "node_39",
+            "node_38",
+            "node_0"
+          ],
+          "chat": [
+            "node_91",
+            "node_87",
+            "node_83",
+            "node_79",
+            "node_75",
+            "node_72",
+            "node_65",
+            "node_58",
+            "node_34",
+            "node_28",
+            "node_25",
+            "node_18",
+            "node_14",
+            "node_8",
+            "node_4"
+          ]
+        }
+      },
+      "chats": [],
+      "currently": "伊莎贝拉正在主持一个语言涌现实验项目，使用Novlang符号语言。她每天在咖啡馆多次召集玛丽亚、卡门、塔玛拉进行交流，观察语言使用模式的演化。她希望通过频繁对话让大家掌握这套新语言。",
+      "action": {
+        "event": {
+          "subject": "伊莎贝拉",
+          "predicate": "此时",
+          "object": "整理咖啡馆桌椅",
+          "describe": "整理咖啡馆桌椅",
+          "address": [
+            "the Ville",
+            "霍布斯咖啡馆",
+            "咖啡馆",
+            "咖啡馆顾客座位"
+          ],
+          "emoji": "整理咖啡馆桌椅"
+        },
+        "obj_event": {
+          "subject": "咖啡馆顾客座位",
+          "predicate": "此时",
+          "object": "正在被擦拭",
+          "describe": "正在被擦拭",
+          "address": [
+            "the Ville",
+            "霍布斯咖啡馆",
+            "咖啡馆",
+            "咖啡馆顾客座位"
+          ],
+          "emoji": ""
+        },
+        "start": "20240213-11:09:00",
+        "duration": 10
+      },
+      "coord": [
+        78,
+        21
+      ]
+    },
+    "玛丽亚": {
+      "config_path": "assets\\village\\agents\\玛丽亚\\agent.json",
+      "status": {
+        "poignancy": 21
+      },
+      "schedule": {
+        "create": "20240213-09:30:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "睡觉",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "睡觉",
+            "start": 420,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "睡觉",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "睡觉",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "放松身心",
+                "start": 540,
+                "duration": 15
+              },
+              {
+                "idx": 1,
+                "describe": "关闭电子设备",
+                "start": 555,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "做睡前冥想",
+                "start": 565,
+                "duration": 20
+              },
+              {
+                "idx": 3,
+                "describe": "阅读轻松书籍",
+                "start": 585,
+                "duration": 10
+              },
+              {
+                "idx": 4,
+                "describe": "入睡",
+                "start": 595,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 10,
+            "describe": "起床",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "深化数学符号体系（整合伊莎贝拉与卡门的符号关联）",
+                "start": 633,
+                "duration": 12
+              },
+              {
+                "idx": 1,
+                "describe": "准备午餐并进行短暂休息（放松与规划后续任务）",
+                "start": 645,
+                "duration": 15
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "前往霍布斯咖啡馆练习Novlang对话",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "准备前往咖啡馆的物品",
+                "start": 660,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "前往霍布斯咖啡馆",
+                "start": 665,
+                "duration": 4
+              },
+              {
+                "idx": 2,
+                "describe": "玛丽亚在咖啡馆讨论加密符号，伊莎贝拉涉及加密运算与符号逻辑。",
+                "start": 669,
+                "duration": 0
+              },
+              {
+                "idx": 3,
+                "describe": "与伊莎贝拉同步Novlang对话练习（整合原11:20-11:40时段）",
+                "start": 669,
+                "duration": 11
+              },
+              {
+                "idx": 4,
+                "describe": "深化Novlang符号结构学习（压缩原11:40-11:55时段）",
+                "start": 680,
+                "duration": 15
+              },
+              {
+                "idx": 5,
+                "describe": "整理加密符号逻辑笔记（调整原11:55-12:00时段）",
+                "start": 695,
+                "duration": 15
+              },
+              {
+                "idx": 6,
+                "describe": "复盘学习内容并规划后续任务",
+                "start": 710,
+                "duration": 10
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "在咖啡馆与伊莎贝拉共进午餐并讨论语言实验",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 13,
+            "describe": "在咖啡馆学习Novlang符号组合标记",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "返回咖啡馆学习Novlang符号组合标记",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "在咖啡馆休息或学习",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "在咖啡馆休息或学习",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "与卡门在咖啡馆进行Novlang角色扮演练习",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "在咖啡馆休息或学习",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "在咖啡馆与塔玛拉探讨语言实验新课题",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "在咖啡馆休息或学习",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "再次前往咖啡馆巩固学习内容",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "在咖啡馆学习或休息",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "睡觉",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_54",
+            "node_53",
+            "node_52",
+            "node_34",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_30",
+            "node_29",
+            "node_28",
+            "node_27",
+            "node_25",
+            "node_24",
+            "node_23",
+            "node_22",
+            "node_20",
+            "node_19",
+            "node_18",
+            "node_16",
+            "node_15",
+            "node_13",
+            "node_12",
+            "node_11",
+            "node_10",
+            "node_9",
+            "node_7",
+            "node_6",
+            "node_5",
+            "node_4",
+            "node_3",
+            "node_2",
+            "node_1"
+          ],
+          "thought": [
+            "node_51",
+            "node_50",
+            "node_49",
+            "node_48",
+            "node_47",
+            "node_46",
+            "node_45",
+            "node_44",
+            "node_43",
+            "node_42",
+            "node_41",
+            "node_40",
+            "node_39",
+            "node_38",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_0"
+          ],
+          "chat": [
+            "node_55",
+            "node_26",
+            "node_21",
+            "node_17",
+            "node_14",
+            "node_8"
+          ]
+        }
+      },
+      "chats": [
+        [
+          "玛丽亚",
+          "○·→·╬：咖啡馆·—·∞·⊂·∇"
+        ],
+        [
+          "伊莎贝拉",
+          "△·→·∝：加密·⊗·∇"
+        ]
+      ],
+      "currently": "玛丽亚正在参与伊莎贝拉主持的Novlang语言实验项目。她对这套符号语言非常感兴趣，每天频繁去霍布斯咖啡馆与伊莎贝拉、卡门、塔玛拉练习对话。她把学习Novlang当作自己的重要任务，经常主动发起交流。",
+      "action": {
+        "event": {
+          "subject": "玛丽亚",
+          "predicate": "此时",
+          "object": "与伊莎贝拉同步Novlang对话练习（整合原11:20-11:40时段）",
+          "describe": "与伊莎贝拉同步Novlang对话练习（整合原11:20-11:40时段）",
+          "address": [
+            "the Ville",
+            "霍布斯咖啡馆",
+            "咖啡馆",
+            "咖啡馆顾客座位"
+          ],
+          "emoji": "与伊莎贝拉同步Novlang对话练习（整合原11:20-11:40时段）"
+        },
+        "obj_event": {
+          "subject": "咖啡馆顾客座位",
+          "predicate": "此时",
+          "object": "正在被使用",
+          "describe": "正在被使用",
+          "address": [
+            "the Ville",
+            "霍布斯咖啡馆",
+            "咖啡馆",
+            "咖啡馆顾客座位"
+          ],
+          "emoji": ""
+        },
+        "start": "20240213-11:09:00",
+        "duration": 11
+      },
+      "coord": [
+        79,
+        25
+      ]
+    },
+    "卡门": {
+      "config_path": "assets\\village\\agents\\卡门\\agent.json",
+      "status": {
+        "poignancy": 68
+      },
+      "schedule": {
+        "create": "20240213-09:30:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "睡觉",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "起床",
+            "start": 420,
+            "duration": 30,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "吃早餐",
+            "start": 450,
+            "duration": 30,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "开店",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 10,
+            "describe": "在店里工作",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理货架",
+                "start": 540,
+                "duration": 15
+              },
+              {
+                "idx": 1,
+                "describe": "处理订单",
+                "start": 555,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "与顾客用Novlang交流",
+                "start": 565,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "检查库存",
+                "start": 575,
+                "duration": 10
+              },
+              {
+                "idx": 4,
+                "describe": "记录销售数据",
+                "start": 585,
+                "duration": 10
+              },
+              {
+                "idx": 5,
+                "describe": "准备咖啡馆练习材料",
+                "start": 595,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "前往霍布斯咖啡馆练习Novlang符号对话",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理测试文档并准备后续优化方案（同步更新符号系统白皮书）",
+                "start": 657,
+                "duration": 2
+              },
+              {
+                "idx": 1,
+                "describe": "进行最终检查与确认，确保所有流程无误，准备下一阶段任务",
+                "start": 659,
+                "duration": 1
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "在店里工作",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "处理线上订单",
+                "start": 660,
+                "duration": 3
+              },
+              {
+                "idx": 1,
+                "describe": "伊莎贝拉用符号传递\"订单\"信息，卡门以符号回应\"咖啡馆\"，双方通过特殊符号系统进行简短交流。",
+                "start": 663,
+                "duration": 0
+              },
+              {
+                "idx": 2,
+                "describe": "整理货架并分类商品",
+                "start": 663,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "与顾客用Novlang交流",
+                "start": 673,
+                "duration": 20
+              },
+              {
+                "idx": 4,
+                "describe": "检查库存并补货",
+                "start": 693,
+                "duration": 10
+              },
+              {
+                "idx": 5,
+                "describe": "记录销售数据并更新账目",
+                "start": 703,
+                "duration": 5
+              },
+              {
+                "idx": 6,
+                "describe": "优化系统设置与备货规划",
+                "start": 708,
+                "duration": 12
+              }
+            ]
+          },
+          {
+            "idx": 13,
+            "describe": "前往霍布斯咖啡馆练习Novlang符号对话",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "在店里工作",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "在店里工作",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "前往霍布斯咖啡馆练习Novlang符号对话",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "在店里工作",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "前往霍布斯咖啡馆练习Novlang符号对话",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "关门并参加晚间讨论",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "看电视",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "看电视",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "看电视",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "睡觉",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 24,
+            "describe": "睡觉",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_78",
+            "node_77",
+            "node_75",
+            "node_74",
+            "node_72",
+            "node_71",
+            "node_70",
+            "node_69",
+            "node_67",
+            "node_66",
+            "node_65",
+            "node_64",
+            "node_62",
+            "node_44",
+            "node_43",
+            "node_41",
+            "node_40",
+            "node_38",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_30",
+            "node_29",
+            "node_28",
+            "node_27",
+            "node_25",
+            "node_24",
+            "node_23",
+            "node_22",
+            "node_21",
+            "node_18",
+            "node_17",
+            "node_16",
+            "node_15",
+            "node_14",
+            "node_13",
+            "node_11",
+            "node_10",
+            "node_9",
+            "node_8",
+            "node_7",
+            "node_6",
+            "node_5",
+            "node_4",
+            "node_3",
+            "node_2",
+            "node_1"
+          ],
+          "thought": [
+            "node_61",
+            "node_60",
+            "node_59",
+            "node_58",
+            "node_57",
+            "node_56",
+            "node_55",
+            "node_54",
+            "node_53",
+            "node_52",
+            "node_51",
+            "node_50",
+            "node_49",
+            "node_48",
+            "node_47",
+            "node_46",
+            "node_45",
+            "node_0"
+          ],
+          "chat": [
+            "node_76",
+            "node_73",
+            "node_68",
+            "node_63",
+            "node_42",
+            "node_39",
+            "node_34",
+            "node_26",
+            "node_20",
+            "node_19",
+            "node_12"
+          ]
+        }
+      },
+      "chats": [
+        [
+          "伊莎贝拉",
+          "⊗·∝·：咖啡馆·10:42"
+        ],
+        [
+          "卡门",
+          "△·⊗·∝·→·∇"
+        ],
+        [
+          "伊莎贝拉",
+          "△·⊗·∝·→·∇：咖啡馆·时间轴"
+        ],
+        [
+          "卡门",
+          "○·⊗·∇：钢琴·→·□"
+        ],
+        [
+          "伊莎贝拉",
+          "(∝·—·△)·⊗·≈"
+        ],
+        [
+          "卡门",
+          "△·⊗·∞·：钢琴·→·∟"
+        ],
+        [
+          "伊莎贝拉",
+          "△·⊗·∝：钢琴·→·加密"
+        ],
+        [
+          "卡门",
+          "∁·‖·∞：加密·→·时间轴"
+        ],
+        [
+          "伊莎贝拉",
+          "●·—·□·：订单·→·∇"
+        ],
+        [
+          "卡门",
+          "●·∟·□·→·⌒·：咖啡馆"
+        ]
+      ],
+      "currently": "卡门正在参与伊莎贝拉的Novlang语言实验项目，与室友塔玛拉一起每天去霍布斯咖啡馆练习符号语言。她觉得这个项目很有意思，经常在工作间隙去咖啡馆与伊莎贝拉、玛丽亚交流。她希望通过频繁对话提高Novlang使用能力。",
+      "action": {
+        "event": {
+          "subject": "卡门",
+          "predicate": "此时",
+          "object": "整理货架并分类商品",
+          "describe": "整理货架并分类商品",
+          "address": [
+            "the Ville",
+            "哈维奥克供应店",
+            "供应店",
+            "供应店产品货架"
+          ],
+          "emoji": "整理货架并分类商品"
+        },
+        "obj_event": {
+          "subject": "供应店产品货架",
+          "predicate": "此时",
+          "object": "正在整理",
+          "describe": "正在整理",
+          "address": [
+            "the Ville",
+            "哈维奥克供应店",
+            "供应店",
+            "供应店产品货架"
+          ],
+          "emoji": ""
+        },
+        "start": "20240213-11:03:00",
+        "duration": 10
+      },
+      "coord": [
+        62,
+        48
+      ]
+    },
+    "塔玛拉": {
+      "config_path": "assets\\village\\agents\\塔玛拉\\agent.json",
+      "status": {
+        "poignancy": 2
+      },
+      "schedule": {
+        "create": "20240213-09:30:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "起床",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "吃早餐",
+            "start": 420,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "写作",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "去霍布斯咖啡馆",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理符号组合分析结果并生成可视化图表",
+                "start": 588,
+                "duration": 6
+              },
+              {
+                "idx": 1,
+                "describe": "塔玛拉与伊莎贝拉分析咖啡馆内座位布局",
+                "start": 594,
+                "duration": 0
+              },
+              {
+                "idx": 2,
+                "describe": "与伊莎贝拉同步实验阶段调整方案，确认最终座位布局",
+                "start": 594,
+                "duration": 6
+              }
+            ]
+          },
+          {
+            "idx": 10,
+            "describe": "在家",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "伊莎贝拉提及钢琴与时间，塔玛拉讨论布局与结构",
+                "start": 603,
+                "duration": 2
+              },
+              {
+                "idx": 1,
+                "describe": "整理Novlang符号库（15分钟）",
+                "start": 605,
+                "duration": 15
+              },
+              {
+                "idx": 2,
+                "describe": "与卡门讨论实验进展（10分钟）",
+                "start": 620,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "记录对话灵感（5分钟）",
+                "start": 630,
+                "duration": 5
+              },
+              {
+                "idx": 4,
+                "describe": "准备咖啡馆对话材料（10分钟）",
+                "start": 635,
+                "duration": 10
+              },
+              {
+                "idx": 5,
+                "describe": "复查笔记并整理后续计划（15分钟）",
+                "start": 645,
+                "duration": 15
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "在家",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "写作",
+                "start": 660,
+                "duration": 20
+              },
+              {
+                "idx": 1,
+                "describe": "整理Novlang实验笔记",
+                "start": 680,
+                "duration": 15
+              },
+              {
+                "idx": 2,
+                "describe": "规划下午对话内容",
+                "start": 695,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "准备咖啡馆所需材料",
+                "start": 705,
+                "duration": 5
+              },
+              {
+                "idx": 4,
+                "describe": "回复Novlang项目相关邮件",
+                "start": 710,
+                "duration": 10
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "午餐",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 13,
+            "describe": "去霍布斯咖啡馆",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "在家",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "去霍布斯咖啡馆",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "在家",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "去霍布斯咖啡馆",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "在家",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "去霍布斯咖啡馆",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "在家",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "在家",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "睡觉",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "睡觉",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_53",
+            "node_52",
+            "node_34",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_30",
+            "node_29",
+            "node_28",
+            "node_27",
+            "node_26",
+            "node_25",
+            "node_24",
+            "node_23",
+            "node_21",
+            "node_20",
+            "node_19",
+            "node_16",
+            "node_15",
+            "node_14",
+            "node_13",
+            "node_11",
+            "node_10",
+            "node_8",
+            "node_7",
+            "node_6",
+            "node_5",
+            "node_4",
+            "node_3",
+            "node_2",
+            "node_1"
+          ],
+          "thought": [
+            "node_51",
+            "node_50",
+            "node_49",
+            "node_48",
+            "node_47",
+            "node_46",
+            "node_45",
+            "node_44",
+            "node_43",
+            "node_42",
+            "node_41",
+            "node_40",
+            "node_39",
+            "node_38",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_0"
+          ],
+          "chat": [
+            "node_22",
+            "node_18",
+            "node_17",
+            "node_12",
+            "node_9"
+          ]
+        }
+      },
+      "chats": [],
+      "currently": "塔玛拉正在参与伊莎贝拉的Novlang语言实验项目，她把这次经历作为新书的创作灵感。她每天与室友卡门一起去霍布斯咖啡馆，与伊莎贝拉、玛丽亚频繁用符号语言交流。她认为多对话能激发创意，也能让大家更好地掌握Novlang。",
+      "action": {
+        "event": {
+          "subject": "塔玛拉",
+          "predicate": "此时",
+          "object": "写作",
+          "describe": "写作",
+          "address": [
+            "the Ville",
+            "塔玛拉和卡门的家",
+            "塔玛拉的房间",
+            "书桌"
+          ],
+          "emoji": "写作"
+        },
+        "obj_event": {
+          "subject": "书桌",
+          "predicate": "此时",
+          "object": "正在被使用",
+          "describe": "正在被使用",
+          "address": [
+            "the Ville",
+            "塔玛拉和卡门的家",
+            "塔玛拉的房间",
+            "书桌"
+          ],
+          "emoji": ""
+        },
+        "start": "20240213-11:00:00",
+        "duration": 20
+      },
+      "coord": [
+        53,
+        74
+      ]
+    }
+  },
+  "step": 35
+}

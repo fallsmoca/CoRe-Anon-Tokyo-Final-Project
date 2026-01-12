@@ -1,0 +1,402 @@
+[
+  {
+    "round": 1,
+    "timestamp": "20240213-100000",
+    "conversations": [
+      {
+        "round": 1,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:00:00",
+        "content": "●→：霍布斯咖啡馆⊗△",
+        "translation": "让我们去霍布斯咖啡馆继续Novlang实验吧"
+      },
+      {
+        "round": 1,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:00:00",
+        "content": "⊕→：霍布斯咖啡馆⊗△",
+        "translation": "能量驱动前往霍布斯咖啡馆融合群体"
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "timestamp": "20240213-100500",
+    "conversations": [
+      {
+        "round": 2,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:05:00",
+        "content": "●→：霍布斯咖啡馆，≈⊗△",
+        "translation": "床边时间接近咖啡馆练习时刻，需要提醒自己调整状态"
+      },
+      {
+        "round": 2,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:05:00",
+        "content": "—♡：∞⊗△",
+        "translation": "在时间流动中融入情感符号：∞♡：霍布斯咖啡馆"
+      }
+    ]
+  },
+  {
+    "round": 3,
+    "timestamp": "20240213-101000",
+    "conversations": [
+      {
+        "round": 3,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:10:00",
+        "content": "●→：霍布斯咖啡馆·实验",
+        "translation": "来霍布斯咖啡馆，一起进行实验吧！"
+      },
+      {
+        "round": 3,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:10:00",
+        "content": "△∟：霍布斯·持续",
+        "translation": "群体·转折：咖啡馆·持续实验"
+      }
+    ]
+  },
+  {
+    "round": 4,
+    "timestamp": "20240213-101500",
+    "conversations": [
+      {
+        "round": 4,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:15:00",
+        "content": "●→：霍布斯咖啡馆‖⊕⊗♡",
+        "translation": "我打算去霍布斯咖啡馆练习Novlang，要一起吗？"
+      },
+      {
+        "round": 4,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:15:00",
+        "content": "○⊗∇→：霍布斯咖啡馆",
+        "translation": "在霍布斯咖啡馆，自然与秩序的交融启发了我的创作"
+      }
+    ]
+  },
+  {
+    "round": 5,
+    "timestamp": "20240213-102000",
+    "conversations": [
+      {
+        "round": 5,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:20:00",
+        "content": "△⊗○→15:00·♡⊂∇",
+        "translation": "让我们一起探索符号的无限可能，下午三点的讨论会需要你的智慧火花"
+      },
+      {
+        "round": 5,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:20:00",
+        "content": "⊕♡：霍布斯→△⊗○·∓‖∇",
+        "translation": "在霍布斯咖啡馆的⊕♡中，用△⊗○创造新的∇"
+      }
+    ]
+  },
+  {
+    "round": 6,
+    "timestamp": "20240213-102500",
+    "conversations": [
+      {
+        "round": 6,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:25:00",
+        "content": "→：霍布斯咖啡馆",
+        "translation": "去霍布斯咖啡馆练习符号对话"
+      },
+      {
+        "round": 6,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:25:00",
+        "content": "∟：11点‖→：咖啡馆",
+        "translation": "时间转折，11点集合"
+      }
+    ]
+  },
+  {
+    "round": 7,
+    "timestamp": "20240213-103000",
+    "conversations": [
+      {
+        "round": 7,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:30:00",
+        "content": "△→●：霍布斯⊗⊕○：实验‖",
+        "translation": "让我们用符号编织清晨的对话，咖啡馆等待着群体的共鸣"
+      },
+      {
+        "round": 7,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:30:00",
+        "content": "○→♡：玛丽亚∄霍布斯‖",
+        "translation": "自然的流动让感官共鸣，玛丽亚在咖啡馆等你"
+      }
+    ]
+  },
+  {
+    "round": 8,
+    "timestamp": "20240213-103500",
+    "conversations": [
+      {
+        "round": 8,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:35:00",
+        "content": "⊕能量→咖啡馆：霍布斯●计划",
+        "translation": "我充满能量要前往霍布斯咖啡馆，和你一起练习Novlang符号语言"
+      },
+      {
+        "round": 8,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:35:00",
+        "content": "⌒⊕→●计划⊗○故事：霍布斯‖∞符号",
+        "translation": "用⌒连接能量与计划，或许能诞生新的叙事维度"
+      }
+    ]
+  },
+  {
+    "round": 9,
+    "timestamp": "20240213-104000",
+    "conversations": [
+      {
+        "round": 9,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:40:00",
+        "content": "△⊕→♡：玛丽亚",
+        "translation": "让我们一起探索符号的能量吧：玛丽亚"
+      },
+      {
+        "round": 9,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:40:00",
+        "content": "○∇：霍布斯",
+        "translation": "在霍布斯咖啡馆自然地聚集"
+      }
+    ]
+  },
+  {
+    "round": 10,
+    "timestamp": "20240213-104500",
+    "conversations": [
+      {
+        "round": 10,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:45:00",
+        "content": "●→‖⊗∶霍布斯∶≈∇∶∞∶⊕",
+        "translation": "下午三点咖啡馆见，新符号练习需要你的融合思维"
+      },
+      {
+        "round": 10,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:45:00",
+        "content": "○⊗⌒∶霍布斯∶♡⊕",
+        "translation": "自然与人工的融合在霍布斯激发出新的能量共鸣"
+      }
+    ]
+  },
+  {
+    "round": 11,
+    "timestamp": "20240213-105000",
+    "conversations": [
+      {
+        "round": 11,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 10:50:00",
+        "content": "♡→∇：咖啡馆·⊗·●→♡：卡门",
+        "translation": "情感共鸣中，邀请你共探符号新维度"
+      },
+      {
+        "round": 11,
+        "speaker": "卡门",
+        "time": "2024-02-13 10:50:00",
+        "content": "●→⊗：下午3点·‖·⊕：能量",
+        "translation": "●→⊗：下午3点·‖·⊕：能量"
+      }
+    ]
+  },
+  {
+    "round": 12,
+    "timestamp": "20240213-105500",
+    "conversations": [
+      {
+        "round": 12,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 10:55:00",
+        "content": "⌒：霍布斯咖啡馆 ⊗ ●—♡∝⊕→",
+        "translation": "我用符号语言邀请你去霍布斯咖啡馆，我们可以在符号交流中感受Novlang的能量流动"
+      },
+      {
+        "round": 12,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 10:55:00",
+        "content": "‖○∇⊄♡⊕→",
+        "translation": "将咖啡馆的流动叙事编织进故事脉络，用符号的韵律捕捉思维的涟漪"
+      }
+    ]
+  },
+  {
+    "round": 13,
+    "timestamp": "20240213-110000",
+    "conversations": [
+      {
+        "round": 13,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 11:00:00",
+        "content": "●:霍布斯咖啡馆 ⌒ ↔ ♡",
+        "translation": "让我们在霍布斯咖啡馆相聚，分享喜悦吧！"
+      },
+      {
+        "round": 13,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 11:00:00",
+        "content": "△:霍布斯咖啡馆 ⊗ ⊕",
+        "translation": "群体：霍布斯咖啡馆 融合 能量"
+      }
+    ]
+  },
+  {
+    "round": 14,
+    "timestamp": "20240213-110500",
+    "conversations": [
+      {
+        "round": 14,
+        "speaker": "卡门",
+        "time": "2024-02-13 11:05:00",
+        "content": "△→○：霍布斯∄→⊂∇",
+        "translation": "准备明天的符号练习，需要调整咖啡馆的讨论时间吗？"
+      },
+      {
+        "round": 14,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 11:05:00",
+        "content": "⊕→∞：霍布斯⊗2024年02月13日",
+        "translation": "能量驱动的永恒循环：霍布斯咖啡馆的创作时刻"
+      }
+    ]
+  },
+  {
+    "round": 15,
+    "timestamp": "20240213-111000",
+    "conversations": [
+      {
+        "round": 15,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 11:10:00",
+        "content": "●→♡：霍布斯",
+        "translation": "存在因果情绪到霍布斯"
+      },
+      {
+        "round": 15,
+        "speaker": "卡门",
+        "time": "2024-02-13 11:10:00",
+        "content": "⊕→♡：下午6点",
+        "translation": "⊕→♡：下午6点"
+      }
+    ]
+  },
+  {
+    "round": 16,
+    "timestamp": "20240213-111500",
+    "conversations": [
+      {
+        "round": 16,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 11:15:00",
+        "content": "△→：霍布斯咖啡馆 ⊕",
+        "translation": "和你一起去霍布斯咖啡馆，充满活力"
+      },
+      {
+        "round": 16,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 11:15:00",
+        "content": "○⊗♡→：霍布斯咖啡馆 ∞",
+        "translation": "自然与情感的融合在咖啡馆持续生长"
+      }
+    ]
+  },
+  {
+    "round": 17,
+    "timestamp": "20240213-112000",
+    "conversations": [
+      {
+        "round": 17,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 11:20:00",
+        "content": "△→：11:20",
+        "translation": "让我们在11:20讨论实验进展"
+      },
+      {
+        "round": 17,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 11:20:00",
+        "content": "△→：霍布斯",
+        "translation": "我想和你一起去霍布斯咖啡馆练习Novlang"
+      }
+    ]
+  },
+  {
+    "round": 18,
+    "timestamp": "20240213-112500",
+    "conversations": [
+      {
+        "round": 18,
+        "speaker": "卡门",
+        "time": "2024-02-13 11:25:00",
+        "content": "♡→塔玛拉：咖啡馆？现在→11:25，≈空闲时间，⊗讨论Novlang？",
+        "translation": "♡→塔玛拉：咖啡馆？现在→11:25，≈空闲时间，⊗讨论Novlang？"
+      },
+      {
+        "round": 18,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 11:25:00",
+        "content": "→≈霍布斯：⊗讨论Novlang？",
+        "translation": "→≈霍布斯：⊗讨论Novlang？"
+      }
+    ]
+  },
+  {
+    "round": 19,
+    "timestamp": "20240213-113000",
+    "conversations": [
+      {
+        "round": 19,
+        "speaker": "伊莎贝拉",
+        "time": "2024-02-13 11:30:00",
+        "content": "△⊗：伊莎贝拉→♡·∇",
+        "translation": "让我们用符号编织今日的实验之网吧"
+      },
+      {
+        "round": 19,
+        "speaker": "卡门",
+        "time": "2024-02-13 11:30:00",
+        "content": "⊕‖●→♡：霍布斯咖啡馆",
+        "translation": "能量与存在的连接带来喜悦，在霍布斯咖啡馆"
+      }
+    ]
+  },
+  {
+    "round": 20,
+    "timestamp": "20240213-113500",
+    "conversations": [
+      {
+        "round": 20,
+        "speaker": "玛丽亚",
+        "time": "2024-02-13 11:35:00",
+        "content": "⊕→●：霍布斯咖啡馆 △→□",
+        "translation": "能量驱动存在：霍布斯咖啡馆，群体引导范围持续学习"
+      },
+      {
+        "round": 20,
+        "speaker": "塔玛拉",
+        "time": "2024-02-13 11:35:00",
+        "content": "♡⊗○：霍布斯咖啡馆 ∇→∞",
+        "translation": "用符号编织故事的经纬线，让咖啡馆的对话成为永恒的叙事漩涡"
+      }
+    ]
+  }
+]

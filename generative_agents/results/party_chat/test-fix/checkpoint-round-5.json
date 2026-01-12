@@ -1,0 +1,12 @@
+{
+  "experiment_name": "test-fix",
+  "current_round": 5,
+  "total_conversations": 5,
+  "agents": [
+    "伊莎贝拉",
+    "玛丽亚",
+    "卡门",
+    "塔玛拉"
+  ],
+  "timestamp": "20251214-185423"
+}
