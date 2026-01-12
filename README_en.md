@@ -1,7 +1,6 @@
-# Language Emergence Experiment of Anon Tokyo
-
 [简体中文](./README.md) | English
 
+# Language Emergence Experiment of Anon Tokyo
 
 ---
 ## Overview
