@@ -1,86 +1,66 @@
+Language Emergence Experiment of Anon Tokyo
+
 [简体中文](./README.md) | English
 
-# Generative Agents Chinesized
 
-## 1. Configure the environment
+---
+Overview
 
-### 1.1 pull the source code:
+Stanford AI Town, open-sourced by Stanford University and Google in August 2023, is a virtual world composed of 25 intelligent agents that simulates real human life.
 
-```
-git clone https://github.com/x-glacier/GenerativeAgentsCN.git
-cd GenerativeAgentsCN
-```
+These 25 agents are entirely powered by ChatGPT, capable of independently organizing parties, attending meetings, and arranging various activities for Valentine's Day. They can exhibit life patterns and behavioral habits similar to human beings.
 
-### 1.2 configure the large language model
+The original code of Generative Agents has a low level of engineering, making it difficult to maintain continuously or expand functions. Moreover, two years later, the capabilities of Chinese LLMs (Large Language Models) are already competent for such tasks. Based on the refactored and deeply localized Chinese versionGenerativeAgentsCn of the original project, we conducted a language emergence experiment with our own refactored version.
 
-Modify the configuration file `generative_agents/data/config.json`:
-1. By default, [Ollama](https://ollama.com/) is used to load local quantization models and OpenAI compatible APIs are provided. We need to first pull the quantization model and ensure that `base_url` and `model` are consistent with the actual configuration of Ollama.
-2. If you want to call other OpenAI compatible APIs, you need to change `provider` to `openai`, and modify `model`, `api_key` and `base_url` to the correct values.
 
-### 1.3 install python dependencies
+---
+Main Work
 
-Use a virtual environment, e.g. with anaconda3:
+1. Preparation
 
-```
-conda create -n generative_agents_cn python=3.12
-conda activate generative_agents_cn
-```
+1.1 Obtain the Code
+
+git clone https://github.com/fallsmoca/CoRe-Anon-Tokyo-Final-Project.git
+cd CoRe-Anon-Tokyo-Final-Project
+
+1.2 Configure the Large Language Model (LLM)
+
+Modify the configuration file generative_agents/data/config.json:
+
+1. By default,Ollama is used to load local quantized models and provide an OpenAI-compatible API. You need to pull the quantized model first (refer to ollama.md) and ensure that base_url and model are consistent with the configurations in Ollama.
+
+2. If you want to call other OpenAI-compatible APIs, you need to change provider to openai, and modify model, api_key, and base_url according to the API documentation.
+
+1.3 Install Python Dependencies
+
+It is recommended to first create and activate a virtual environment using anaconda3:
+
+conda create -n anontokyo python=3.12
+conda activate anontokyo
 
 Install dependencies:
 
-```
 pip install -r requirements.txt
-```
 
-## 2. Start a simulation
+Check the environment and the LLM:
 
-```
 cd generative_agents
-python start.py --name sim-test --start "20240213-09:30" --step 10 --stride 10
-```
+python test_setup.py
+python test_llm_format.py
 
-arguments:
-- `name` - the name of the simulation
-- `start` - the starting time of the simulated ville
-- `resume` - resume running the simulation
-- `step` - how many steps to simulate
-- `stride` - how many minutes to forward after each step, e.g. 9:00->9:10->9:20 if stride=10
 
-## 3. Replay a simulation
+2. Run the Language Emergence Experiment
 
-### 3.1 generate replay data
+python party_chat.py --name experiment --rounds 10 --turns 20 --group-interval 3 --inject-round 4
 
-```
-python compress.py --name <simulation-name>
-```
+Parameter Description
 
-After running, the replay data file `movement.json` will be generated in the `results/compressed/<simulation-name>` folder. At the same time, `simulation.md` will be generated to present the status and conversation of each agent in a timeline.
+- name - Each time you start the virtual town, you need to set a unique name for recording experimental results.
 
-### 3.2 start the replay server
+- rounds - Total rounds. How many dialogue rounds the experiment will run.
 
-```
-python replay.py
-```
+- turns - Number of turns per round. How many sentences two characters exchange (one speaking and the other responding) in one dialogue round.
 
-Visit the server in browser (url: `http://127.0.0.1:5000/?name=<simulation-name>`),  you'll see agents walking around on time.
+- group-interval - Group chat frequency. How many rounds to trigger a "village square multi-person shared dialogue" (all characters gather to chat).
 
-arguments:  
-- `name` - the name of the simulation
-- `step` - the starting step of the simulated ville (greater than 0)
-- `speed` - replay speed (0-5)
-- `zoom` - zoom ratio (e.g. 0.8)
-
-For example, if the simulation name is `sim-test`, the url can be:
-http://127.0.0.1:5000/?name=sim-test&step=0&speed=2&zoom=0.6
-
-## 4. Reference
-
-### 4.1 paper
-
-[Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442)
-
-### 4.2 gitHub repository
-
-[Generative Agents](https://github.com/joonspk-research/generative_agents)
-
-[wounderland](https://github.com/Archermmt/wounderland)
+- inject-round - The round to inject foreign words, i.e., in which round to introduce foreign words (optional).

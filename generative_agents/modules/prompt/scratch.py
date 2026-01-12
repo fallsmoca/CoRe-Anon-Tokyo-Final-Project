@@ -1,6 +1,7 @@
 """generative_agents.prompt.scratch"""
 
 import random
+import json
 import datetime
 import re
 from string import Template
@@ -752,10 +753,13 @@ class Scratch:
             normalized = self._normalize_chat_json(snippet)
             try:
                 json_content = utils.load_dict(normalized)
-            except Exception as exc:
-                raise ValueError(
-                    "LLM output不是合法JSON：" + response
-                ) from exc
+            except Exception:
+                try:
+                    json_content = json.loads(normalized, strict=False)
+                except Exception as exc:
+                    raise ValueError(
+                        f"LLM output不是合法JSON：{response}\nNormalized: {normalized}"
+                    ) from exc
             
             # 新格式支持：scene_observation, thinking, chinese, novlang
             novlang = json_content.get("novlang", "") or json_content.get("text", "") or json_content.get(agent.name, "")
@@ -777,22 +781,42 @@ class Scratch:
         return {
             "prompt": prompt,
             "callback": _callback,
-            "failsafe": "嗯",
+            "failsafe": {
+                "scene_observation": "...",
+                "thinking": "...",
+                "chinese": "...",
+                "novlang": "..."
+            },
         }
 
     def _normalize_chat_json(self, text):
         replacements = {
-            "“": '"',
-            "”": '"',
-            "‘": '"',
-            "’": '"',
-            "＂": '"',
-            "＇": '"',
+            # "“": '"',  # Disable replacing double smart quotes to avoid breaking inner content if used as text
+            # "”": '"',
+            # "‘": '"',
+            # "’": '"',
+            # "＂": '"',
+            # "＇": '"',
         }
         for src, dst in replacements.items():
             text = text.replace(src, dst)
-        # 去掉 JSON 对象或数组结尾处多余的逗号
+        
+        # [Added] Replace newlines and tabs with spaces to handle unescaped control chars in JSON strings
+        text = text.replace("\n", " ").replace("\r", "").replace("\t", " ")
+        
+            # [Added] Escape characters that are invalid in JSON strings but not yet escaped
+            # This is a basic attempt to fix common issues like unescaped quotes inside strings
+            # Note: This is risky if patterns are complex, but helps with simple nested quotes
+            # A better approach relies on the LLM generating valid JSON, this is a last resort.
+            
+            # 去掉 JSON 对象或数组结尾处多余的逗号
         text = re.sub(r",\s*([}\]])", r"\1", text)
+            
+            # [Added] Try to fix common "double quote inside double quote" issue
+            # e.g. "key": "say "hello" world" -> "key": "say 'hello' world"
+            # This is hard to do perfectly with regex without a full parser, 
+            # so we'll trust the previous cleanups did most of the work.
+        
         return text
 
     def prompt_generate_chat_check_repeat(self, agent, chats, content):
@@ -831,14 +855,26 @@ class Scratch:
         )
 
         def _callback(response):
+            # [Added] Strip markdown code blocks ```json ... ```
+            response = response.strip()
+            if response.startswith("```"):
+                # Remove first line (```json or ```)
+                response = response.split("\n", 1)[1] if "\n" in response else ""
+                # Remove last line (```)
+                if response.strip().endswith("```"):
+                     response = response.rsplit("```", 1)[0]
+
             if "{" not in response or "}" not in response:
                 raise ValueError("LLM output缺少JSON结构：" + response)
             snippet = "{" + response.split("{", 1)[1].rsplit("}", 1)[0] + "}"
             normalized = self._normalize_chat_json(snippet)
             try:
                 json_content = utils.load_dict(normalized)
-            except Exception as exc:
-                raise ValueError("LLM output不是合法JSON：" + response) from exc
+            except Exception:
+                try:
+                    json_content = json.loads(normalized, strict=False)
+                except Exception as exc:
+                    raise ValueError(f"LLM output不是合法JSON：{response}\nNormalized: {normalized}") from exc
             
             return {
                 "symbol_analysis": json_content.get("symbol_analysis", ""),
@@ -866,14 +902,34 @@ class Scratch:
         )
 
         def _callback(response):
+            # [Added] Strip markdown code blocks ```json ... ```
+            response = response.strip()
+            if response.startswith("```"):
+                # Remove first line (```json or ```)
+                response = response.split("\n", 1)[1] if "\n" in response else ""
+                # Remove last line (```)
+                if response.strip().endswith("```"):
+                     response = response.rsplit("```", 1)[0]
+            
+            # [Added] Truncate very long responses (likely hallucination loops)
+            if len(response) > 5000:
+                print(f"⚠️ Response truncated from {len(response)} chars to 5000 chars (Loop detection)")
+                # Try to find the last complete JSON object closing brace before the cut
+                cutoff = response[:5000].rfind("}")
+                if cutoff != -1:
+                    response = response[:cutoff+1] + "}"
+            
             if "{" not in response or "}" not in response:
-                raise ValueError("LLM output缺少JSON结构：" + response)
+                raise ValueError("LLM output缺少JSON结构：" + response[:200] + "...")
             snippet = "{" + response.split("{", 1)[1].rsplit("}", 1)[0] + "}"
             normalized = self._normalize_chat_json(snippet)
             try:
                 json_content = utils.load_dict(normalized)
-            except Exception as exc:
-                raise ValueError("LLM output不是合法JSON：" + response) from exc
+            except Exception:
+                try:
+                    json_content = json.loads(normalized, strict=False)
+                except Exception as exc:
+                    raise ValueError(f"LLM output不是合法JSON：{response}\nNormalized: {normalized}") from exc
             
             return {
                 "semantic_match": json_content.get("semantic_match", "低"),

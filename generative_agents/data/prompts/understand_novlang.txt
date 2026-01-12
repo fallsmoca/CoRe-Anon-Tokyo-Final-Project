@@ -35,9 +35,9 @@ ${conversation_history}
 2. 结合场景上下文推断完整意思
 3. 给出你认为的中文翻译
 
-请严格按照以下JSON格式输出：
+请严格按照以下JSON格式输出，不要包含任何额外内容：
 {
-    "symbol_analysis": "<逐个符号的含义分析>",
-    "context_clues": "<从场景和对话历史中获得的线索>",
-    "my_understanding": "<你理解的中文含义>"
+    "symbol_analysis": "请用一段文字分析符号的组合含义（不要使用列表或字典格式）",
+    "context_clues": "你从场景和对话历史中获得的线索",
+    "my_understanding": "你最终理解的中文含义"
 }

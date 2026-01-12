@@ -5,6 +5,7 @@
 import os
 import json
 import copy
+import random
 import argparse
 import datetime
 from dotenv import load_dotenv, find_dotenv
@@ -21,6 +22,21 @@ EXPERIMENT_PERSONAS = [
 ]
 
 
+class MockEvent:
+    def __init__(self, description):
+        self.description = description
+    
+    def get_describe(self, check=True):
+        return self.description
+
+class GroupListener:
+    def __init__(self, name="大家"):
+        self.name = name
+        self._event = MockEvent("聚在一起讨论")
+    
+    def get_event(self):
+        return self._event
+
 class LanguageEmergenceChat:
     """
     语言涌现对话实验类
@@ -28,14 +44,16 @@ class LanguageEmergenceChat:
     """
     
     def __init__(self, name, static_root, checkpoints_folder, config, 
-                 novlang_rules=None, start_round=0, verbose="info", turns_per_round=5):
+                 novlang_rules=None, start_round=0, verbose="info", turns_per_round=5,
+                 group_chat_interval=3):
         self.name = name
         self.static_root = static_root
         self.checkpoints_folder = checkpoints_folder
         self.config = config
         self.novlang_rules = novlang_rules
         self.start_round = start_round
-        self.turns_per_round = turns_per_round  # 每轮对话的回合数
+        self.turns_per_round = turns_per_round
+        self.group_chat_interval = group_chat_interval
         
         os.makedirs(checkpoints_folder, exist_ok=True)
         
@@ -82,11 +100,23 @@ class LanguageEmergenceChat:
 
         # 特殊指令字典
         self.special_instructions = {}
+        # 知识库字典 {agent_name: knowledge_text}
+        self.agent_knowledge = {}
 
     def set_agent_instruction(self, agent_name, instruction):
         """为特定Agent设置隐秘指令"""
         self.special_instructions[agent_name] = instruction
         self.logger.info(f"已为 {agent_name} 设置特殊指令")
+
+    def inject_knowledge(self, agent_names, knowledge_text):
+        """为一组Agent注入秘密知识"""
+        if isinstance(agent_names, str):
+            agent_names = [agent_names]
+        for name in agent_names:
+            if name not in self.agent_knowledge:
+                self.agent_knowledge[name] = ""
+            self.agent_knowledge[name] += f"\n\n[新增秘密知识/规则]:\n{knowledge_text}"
+            self.logger.info(f"已为 {name} 注入新知识 (长度: {len(knowledge_text)})")
     
     def _get_scene_context(self, agent1, agent2):
         """获取当前场景描述"""
@@ -148,8 +178,14 @@ class LanguageEmergenceChat:
             if round_data:
                 self.rounds_data.append(round_data)
             
+            # [新增] 定期触发多人共享对话
+            if (round_num + 1) % self.group_chat_interval == 0:
+                self.logger.info(f"\n>>> 触发多人共享对话 (Round {round_num + 1})")
+                group_data = self._run_group_conversation(round_num + 1, timer)
+                self.rounds_data.append(group_data)
+
             # 定期保存
-            if (round_num + 1) % 5 == 0 or round_num == self.start_round + num_rounds - 1:
+            if (round_num + 1) % 1 == 0 or round_num == self.start_round + num_rounds - 1:
                 self._save_progress(round_num + 1)
             
             timer.forward(10)
@@ -157,6 +193,101 @@ class LanguageEmergenceChat:
         self.logger.info("\n" + utils.split_line("实验完成", "="))
         self._save_progress(self.start_round + num_rounds)
     
+    def _run_group_conversation(self, round_num, timer):
+        """执行多人（全员）共享对话"""
+        scene_context = f"""
+        地点: 村庄广场
+        时间: {timer.get_date("%Y-%m-%d %H:%M")}
+        参与者: {', '.join(self.agents)}
+        情境: 所有人聚在一起，分享之前的发现和想法。
+        """
+        conversation_history = []
+        group_listener = GroupListener("大家")
+        
+        # 获取所有参与者对象
+        participants = [self.game.get_agent(name) for name in self.agents]
+        # 随机打乱发言顺序(或保持固定也没关系)
+        # random.shuffle(participants) 
+        
+        self.logger.info(f"\n>>> 所有人聚集在广场开始讨论...")
+        
+        for turn in range(self.turns_per_round):
+            # 轮流发言
+            speaker = participants[turn % len(participants)]
+            self.logger.info(f"\n--- 群聊回合 {turn + 1}/{self.turns_per_round} ({speaker.name} 对大家说) ---")
+            
+            # 准备对话历史
+            raw_chats = [
+                (e["speaker"], {"novlang": e["novlang"], "chinese": e["chinese"]}) 
+                for e in conversation_history
+            ]
+            
+            # 注入指令
+            speaker_instruction = self.special_instructions.get(speaker.name, "")
+            speaker_knowledge = self.agent_knowledge.get(speaker.name, "")
+            speaker_context = scene_context
+            
+            if speaker_knowledge:
+                speaker_context += speaker_knowledge
+            if speaker_instruction:
+                 speaker_context += f"\n[秘密/特殊指令]: {speaker_instruction}"
+
+            try:
+                # 调用生成 (使用Mock的GroupListener作为听众)
+                response = speaker.completion(
+                    "generate_chat", speaker, group_listener, speaker_context, raw_chats
+                )
+                speaker_content = speaker._extract_chat_content(response)
+                
+                novlang = speaker_content.get("novlang", "")
+                chinese = speaker_content.get("chinese", "")
+                scene_obs = speaker_content.get("scene_observation", "")
+                thinking = speaker_content.get("thinking", "")
+                
+                # 简单校验
+                if chinese and not any('\u4e00' <= c <= '\u9fff' for c in chinese):
+                    if novlang and any('\u4e00' <= c <= '\u9fff' for c in novlang):
+                        chinese, novlang = novlang, chinese
+                
+                self.logger.info(f"  {speaker.name} (中文): {chinese}")
+                self.logger.info(f"  (Novlang): {novlang}")
+                
+                entry = {
+                    "turn": turn + 1,
+                    "speaker": speaker.name,
+                    "listener": "Everyone",
+                    "time": timer.get_date("%Y-%m-%d %H:%M:%S"),
+                    "novlang": novlang,
+                    "chinese": chinese,
+                    "scene_observation": scene_obs,
+                    "thinking": thinking,
+                    "is_group_chat": True
+                }
+                conversation_history.append(entry)
+                
+                # 同步到全局
+                chat_key = entry['time'] + f"-{turn}"
+                clean_entry = {
+                    "speaker": speaker.name,
+                    "listener": "Everyone",
+                    "content": chinese,
+                    "novlang_original": novlang,
+                    "type": "group_chat"
+                }
+                self.game.conversation[chat_key] = clean_entry
+                
+            except Exception as e:
+                self.logger.error(f"群聊生成失败: {e}")
+            
+        return {
+            "round": round_num,
+            "type": "group_chat",
+            "timestamp": timer.get_date("%Y%m%d-%H%M%S"),
+            "participants": self.agents,
+            "scene": scene_context,
+            "conversations": conversation_history,
+        }
+
     def _run_multi_turn_conversation(self, agent1, agent2, round_num, timer):
         """
         执行多轮对话
@@ -190,7 +321,11 @@ class LanguageEmergenceChat:
             
             # 注入特殊指令
             speaker_instruction = self.special_instructions.get(speaker.name, "")
+            speaker_knowledge = self.agent_knowledge.get(speaker.name, "")
             speaker_context = scene_context
+            
+            if speaker_knowledge:
+                speaker_context += speaker_knowledge
             if speaker_instruction:
                  speaker_context += f"\n[秘密/特殊指令]: {speaker_instruction}"
 
@@ -250,9 +385,13 @@ class LanguageEmergenceChat:
                 if retry_count > 0:
                     retry_context = f"\n[系统提示] 上一次你的理解有误。说话者的反馈建议是: {last_suggestion}。请重新思考这句话的含义。"
 
-                # 注入听者指令
+                # 注入听者指令和知识
                 listener_instruction = self.special_instructions.get(listener.name, "")
+                listener_knowledge = self.agent_knowledge.get(listener.name, "")
                 listener_context = scene_context
+                
+                if listener_knowledge:
+                    listener_context += listener_knowledge
                 if listener_instruction:
                     listener_context += f"\n[秘密/特殊指令]: {listener_instruction}"
 
@@ -361,22 +500,6 @@ class LanguageEmergenceChat:
         # 保存理解数据
         self.understanding_data.extend(understanding_records)
         
-        # [同步到全局对话记录] 仅保留纯粹的对话内容（说话人、听话人、内容）
-        for entry in conversation_history:
-            # conversation key 通常格式: "speaker:listener" 或者只是个时间戳列表
-            # 这里我们简单地追加到全局列表中，如果不匹配原格式可能需要调整
-            # 假设 game.conversation 是一个列表或者简单的字典结构
-            
-            # 使用时间戳作为key，确保唯一
-            chat_key = entry['time']
-            clean_entry = {
-                "speaker": entry['speaker'],
-                "listener": entry['listener'],
-                "content": entry['chinese'], # 仅保留中文内容（翻译后的）作为可读内容
-                "novlang_original": entry['novlang'] # 保留原文
-            }
-            self.game.conversation[chat_key] = clean_entry
-
         return {
             "round": round_num,
             "timestamp": timer.get_date("%Y%m%d-%H%M%S"),
@@ -483,6 +606,10 @@ if __name__ == "__main__":
     parser.add_argument("--resume", action="store_true", help="继续上次实验")
     parser.add_argument("--novlang-file", type=str, default="", help="新语言规则文件路径")
     parser.add_argument("--verbose", type=str, default="info", help="日志级别")
+    parser.add_argument("--group-interval", type=int, default=3, help="多人共享对话频率（每多少轮一次）")
+    parser.add_argument("--inject-round", type=int, default=0, help="在第几轮注入额外知识（0表示不注入）")
+    # 使用跨平台默认路径（正斜杠），并在解析后统一转为绝对路径
+    parser.add_argument("--additional-novlang", type=str, default="data/prompts/additional_novlang.txt", help="额外知识文件路径")
     args = parser.parse_args()
     
     # 实验名称
@@ -537,7 +664,8 @@ if __name__ == "__main__":
         novlang_rules=novlang_rules,
         start_round=start_round,
         verbose=args.verbose,
-        turns_per_round=args.turns
+        turns_per_round=args.turns,
+        group_chat_interval=args.group_interval
     )
     
     # 运行实验
@@ -546,8 +674,82 @@ if __name__ == "__main__":
     print(f"参与者: {', '.join(EXPERIMENT_PERSONAS)}")
     print(f"计划轮次: {args.rounds}")
     print(f"每轮回合: {args.turns}")
+    print(f"多人对话: 每 {args.group_interval} 轮触发一次")
+    
+    # 额外知识注入配置
+    inject_round = args.inject_round
+    # 若为相对路径，则基于当前脚本目录构建绝对路径，避免工作目录差异导致找不到文件
+    additional_file = args.additional_novlang
+    if additional_file:
+        script_dir = os.path.dirname(__file__)
+        if not os.path.isabs(additional_file):
+            additional_file = os.path.normpath(os.path.join(script_dir, additional_file))
+    # 指定要注入知识的两个 Agent 
+    # (你可以修改这里，或者通过参数传，这里默认给前两个)
+    secret_agents = [EXPERIMENT_PERSONAS[0], EXPERIMENT_PERSONAS[1]] 
+
+    if inject_round > 0 and os.path.exists(additional_file):
+        print(f"计划在第 {inject_round} 轮为 {secret_agents} 注入 '{additional_file}' 内容")
+    
     print(f"{'='*60}\n")
     
-    experiment.run_conversation_rounds(args.rounds)
+    # 手动展开 run_conversation_rounds 以便在中间注入
+    # experiment.run_conversation_rounds(args.rounds)
+    
+    timer = utils.get_timer()
+    total_rounds = args.rounds
+    start_r = experiment.start_round
+    
+    for r in range(start_r, start_r + total_rounds):
+        # [知识注入检查]
+        if inject_round > 0 and (r + 1) == inject_round:
+            if os.path.exists(additional_file):
+                with open(additional_file, "r", encoding="utf-8") as f:
+                    knowledge = f.read()
+                experiment.inject_knowledge(secret_agents, knowledge)
+                print(f"\n>>> [系统事件] 第 {r+1} 轮到达！已为 {secret_agents} 注入秘密知识！")
+            else:
+                print(f"\n>>> [系统警告] 找不到文件 {additional_file}，无法注入知识。")
+
+        round_title = f"对话轮次 Round {r + 1}/{start_r + total_rounds}"
+        experiment.logger.info("\n" + utils.split_line(round_title, "="))
+        
+        # 选择对话对
+        agent_pairs = [
+            (experiment.agents[0], experiment.agents[1]),
+            (experiment.agents[2], experiment.agents[3]),
+            (experiment.agents[0], experiment.agents[2]),
+            (experiment.agents[1], experiment.agents[3]),
+        ]
+        pair_idx = r % len(agent_pairs)
+        agent1_name, agent2_name = agent_pairs[pair_idx]
+        
+        agent1 = experiment.game.get_agent(agent1_name)
+        agent2 = experiment.game.get_agent(agent2_name)
+        
+        experiment.logger.info(f"\n>>> {agent1_name} 和 {agent2_name} 开始多轮对话...")
+        
+        # 执行多轮对话
+        round_data = experiment._run_multi_turn_conversation(
+            agent1, agent2, r + 1, timer
+        )
+        
+        if round_data:
+            experiment.rounds_data.append(round_data)
+        
+        # 触发多人共享对话
+        if (r + 1) % args.group_interval == 0:
+            experiment.logger.info(f"\n>>> 触发多人共享对话 (Round {r + 1})")
+            group_data = experiment._run_group_conversation(r + 1, timer)
+            experiment.rounds_data.append(group_data)
+
+        # 定期保存
+        if (r + 1) % 5 == 0 or r == start_r + total_rounds - 1:
+            experiment._save_progress(r + 1)
+        
+        timer.forward(10)
+    
+    experiment.logger.info("\n" + utils.split_line("实验完成", "="))
+    experiment._save_progress(start_r + total_rounds)
     
     print(f"\n实验完成！数据保存在: {checkpoints_folder}")
