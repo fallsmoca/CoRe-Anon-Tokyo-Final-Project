@@ -20,8 +20,10 @@ Main Work
 
 1.1 Obtain the Code
 
+```
 git clone https://github.com/fallsmoca/CoRe-Anon-Tokyo-Final-Project.git
 cd CoRe-Anon-Tokyo-Final-Project
+```
 
 1.2 Configure the Large Language Model (LLM)
 
@@ -35,32 +37,40 @@ Modify the configuration file generative_agents/data/config.json:
 
 It is recommended to first create and activate a virtual environment using anaconda3:
 
+```
 conda create -n anontokyo python=3.12
 conda activate anontokyo
+```
 
 Install dependencies:
 
+```
 pip install -r requirements.txt
+```
 
 Check the environment and the LLM:
 
+```
 cd generative_agents
 python test_setup.py
 python test_llm_format.py
+```
 
 
 2. Run the Language Emergence Experiment
 
-python party_chat.py --name experiment --rounds 10 --turns 20 --group-interval 3 --inject-round 4
+```
+ python party_chat.py --name experiment --rounds 10 --turns 20 --group-interval 3 --inject-round 4
+```
 
 Parameter Description
 
-- name - Each time you start the virtual town, you need to set a unique name for recording experimental results.
+- `name` - Each time you start the virtual town, you need to set a unique name for recording experimental results.
 
-- rounds - Total rounds. How many dialogue rounds the experiment will run.
+- `rounds` - Total rounds. How many dialogue rounds the experiment will run.
 
-- turns - Number of turns per round. How many sentences two characters exchange (one speaking and the other responding) in one dialogue round.
+- `turns` - Number of turns per round. How many sentences two characters exchange (one speaking and the other responding) in one dialogue round.
 
-- group-interval - Group chat frequency. How many rounds to trigger a "village square multi-person shared dialogue" (all characters gather to chat).
+- `group-interval` - Group chat frequency. How many rounds to trigger a "village square multi-person shared dialogue" (all characters gather to chat).
 
-- inject-round - The round to inject foreign words, i.e., in which round to introduce foreign words (optional).
+- `inject-round` - The round to inject foreign words, i.e., in which round to introduce foreign words (optional).

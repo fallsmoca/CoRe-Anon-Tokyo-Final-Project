@@ -1,4 +1,3 @@
-
 """
 语言涌现分析工具
 用于分析四人对话实验中的Novlang符号使用模式
@@ -8,6 +7,9 @@ import re
 from collections import Counter, defaultdict
 from pathlib import Path
 import argparse
+import matplotlib.pyplot as plt
+import numpy as np
+from datetime import datetime
 
 # Novlang基础符号
 NOVLANG_SYMBOLS = {
@@ -132,6 +134,7 @@ class LanguageEmergenceAnalyzer:
         pattern = f'[{re.escape(all_symbols)}]{{2,3}}'
         combinations = re.findall(pattern, text)
         return combinations
+    
     def trace_emergence(self, target, output_file=None):
         """追踪特定词汇的涌现过程 (按时间顺序)"""
         lines = []
@@ -177,7 +180,133 @@ class LanguageEmergenceAnalyzer:
                     f.write('\n'.join(lines))
                 print(f"\n📁 报告已保存至: {output_file}")
             except Exception as e:
-                print(f"\n❌ 保存报告失败: {e}")    
+                print(f"\n❌ 保存报告失败: {e}")
+    
+    def visualize_frequency_trends(self, output_dir=None):
+        """可视化词频、词汇组和新词随时间的变化趋势"""
+        if output_dir is None:
+            output_dir = self.rounds_file.parent
+        
+        # 准备数据：每轮的词频、词汇组和新词使用情况
+        rounds = []
+        symbol_freq_by_round = defaultdict(lambda: defaultdict(int))
+        combination_freq_by_round = defaultdict(lambda: defaultdict(int))
+        new_symbol_freq_by_round = defaultdict(lambda: defaultdict(int))
+        
+        for round_idx, round_data in enumerate(self.data):
+            round_num = round_data.get('round', round_idx + 1)
+            rounds.append(round_num)
+            
+            conversations = round_data.get('conversations', [])
+            for conv in conversations:
+                novlang_content = conv.get('novlang', '')
+                
+                # 统计符号使用
+                for symbol in self.extract_symbols(novlang_content):
+                    symbol_freq_by_round[round_num][symbol] += 1
+                    
+                    # 如果是新符号，单独统计
+                    if symbol in NEW_SYMBOLS or symbol in NEW_OPERATORS:
+                        new_symbol_freq_by_round[round_num][symbol] += 1
+                
+                # 统计组合使用
+                for combo in self.extract_combinations(novlang_content):
+                    combination_freq_by_round[round_num][combo] += 1
+        
+        # 获取全局前五的符号、组合和新词
+        all_symbols_combined = Counter()
+        for round_freq in symbol_freq_by_round.values():
+            for symbol, count in round_freq.items():
+                all_symbols_combined[symbol] += count
+        
+        all_combinations_combined = Counter()
+        for round_freq in combination_freq_by_round.values():
+            for combo, count in round_freq.items():
+                all_combinations_combined[combo] += count
+        
+        all_new_symbols_combined = Counter()
+        for round_freq in new_symbol_freq_by_round.values():
+            for symbol, count in round_freq.items():
+                all_new_symbols_combined[symbol] += count
+        
+        # 取前五
+        top_symbols = [item[0] for item in all_symbols_combined.most_common(5)]
+        top_combinations = [item[0] for item in all_combinations_combined.most_common(5)]
+        top_new_symbols = [item[0] for item in all_new_symbols_combined.most_common(5)]
+        
+        # 如果没有足够的新词，使用所有新词
+        if len(top_new_symbols) < 5 and (NEW_SYMBOLS or NEW_OPERATORS):
+            all_new_symbols = list(NEW_SYMBOLS.keys()) + list(NEW_OPERATORS.keys())
+            top_new_symbols = all_new_symbols[:5]
+        
+        # 创建可视化
+        fig, axes = plt.subplots(3, 1, figsize=(12, 15))
+        
+        # 1. 符号频率趋势
+        ax1 = axes[0]
+        for symbol in top_symbols:
+            freqs = [symbol_freq_by_round[round_num].get(symbol, 0) for round_num in rounds]
+            ax1.plot(rounds, freqs, marker='o', label=f'{symbol}')
+        
+        ax1.set_title('Top 5 Symbols Frequency Over Time', fontsize=14, fontweight='bold')
+        ax1.set_xlabel('Round Number')
+        ax1.set_ylabel('Frequency')
+        ax1.legend(title='Symbols')
+        ax1.grid(True, alpha=0.3)
+        
+        # 2. 组合频率趋势
+        ax2 = axes[1]
+        for combo in top_combinations:
+            freqs = [combination_freq_by_round[round_num].get(combo, 0) for round_num in rounds]
+            ax2.plot(rounds, freqs, marker='s', label=f'{combo}')
+        
+        ax2.set_title('Top 5 Symbol Combinations Over Time', fontsize=14, fontweight='bold')
+        ax2.set_xlabel('Round Number')
+        ax2.set_ylabel('Frequency')
+        ax2.legend(title='Combinations')
+        ax2.grid(True, alpha=0.3)
+        
+        # 3. 新词频率趋势
+        ax3 = axes[2]
+        for symbol in top_new_symbols:
+            freqs = [new_symbol_freq_by_round[round_num].get(symbol, 0) for round_num in rounds]
+            ax3.plot(rounds, freqs, marker='^', label=f'{symbol}')
+        
+        ax3.set_title('New Symbols Frequency Over Time', fontsize=14, fontweight='bold')
+        ax3.set_xlabel('Round Number')
+        ax3.set_ylabel('Frequency')
+        ax3.legend(title='New Symbols')
+        ax3.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        
+        # 保存图像
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_path = output_dir / f"frequency_trends_{timestamp}.png"
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        print(f"\n📊 可视化图表已保存至: {output_path}")
+        
+        # 保存数据用于后续分析
+        data_output = {
+            'rounds': rounds,
+            'top_symbols': top_symbols,
+            'top_combinations': top_combinations,
+            'top_new_symbols': top_new_symbols,
+            'symbol_freq_by_round': {str(k): dict(v) for k, v in symbol_freq_by_round.items()},
+            'combination_freq_by_round': {str(k): dict(v) for k, v in combination_freq_by_round.items()},
+            'new_symbol_freq_by_round': {str(k): dict(v) for k, v in new_symbol_freq_by_round.items()}
+        }
+        
+        data_file = output_dir / f"frequency_data_{timestamp}.json"
+        with open(data_file, 'w', encoding='utf-8') as f:
+            json.dump(data_output, f, indent=2, ensure_ascii=False)
+        
+        print(f"📁 数据文件已保存至: {data_file}")
+        
+        return data_output
+    
     def analyze(self):
         """执行完整分析"""
         output_lines = []
@@ -252,6 +381,12 @@ class LanguageEmergenceAnalyzer:
             print(f"\n✅ 完整报告已保存至: {report_file}")
         except Exception as e:
             print(f"\n❌ 保存失败: {e}")
+        
+        # 生成可视化图表
+        try:
+            self.visualize_frequency_trends()
+        except Exception as e:
+            print(f"\n⚠ 可视化生成失败: {e}")
     
     def _print_symbol_usage(self, log_func=print):
         """打印基础符号使用频率"""
@@ -638,6 +773,7 @@ def main():
     parser.add_argument('rounds_file', help='rounds.json文件路径')
     parser.add_argument('--export-timeline', help='导出时间线数据到指定文件')
     parser.add_argument('--trace', help='追踪特定词汇的涌现过程（按时间顺序输出）')
+    parser.add_argument('--visualize', action='store_true', help='生成可视化图表')
     args = parser.parse_args()
     
     analyzer = LanguageEmergenceAnalyzer(args.rounds_file)
@@ -646,6 +782,9 @@ def main():
         # 自动生成追踪报告文件名
         trace_file = Path(args.rounds_file).parent / f"trace_{args.trace}.txt"
         analyzer.trace_emergence(args.trace, trace_file)
+    elif args.visualize:
+        # 只生成可视化图表
+        analyzer.visualize_frequency_trends()
     else:
         analyzer.analyze()
     
