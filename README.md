@@ -64,3 +64,5 @@ python test_llm_format.py
 - `turns` - 每轮的回合数。在一轮对话中，两个角色一来一回说多少句话。
 - `group-interval` - 群聊频率。每隔多少轮（Round），触发一次“村庄广场多人共享对话”（所有角色聚在一起聊天）。
 - `inject-round` - 插入外来词语的轮数，即在第几轮引入外来词语（可选）
+
+p.s. 我们的demo存储在demo文件夹下的demo_new.html中，该文件夹下的generate_viz.py能将rounds.json改成demo的格式

@@ -1,0 +1,12 @@
+{
+  "experiment_name": "experiment1",
+  "current_round": 20,
+  "total_conversations": 20,
+  "agents": [
+    "伊莎贝拉",
+    "玛丽亚",
+    "卡门",
+    "塔玛拉"
+  ],
+  "timestamp": "20260110-164616"
+}

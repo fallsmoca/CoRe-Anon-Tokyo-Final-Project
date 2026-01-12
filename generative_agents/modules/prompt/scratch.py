@@ -705,21 +705,18 @@ class Scratch:
         }
 
     def prompt_generate_chat(self, agent, other, relation, chats):
-        # 减少对自身记忆的依赖，增强对话历史
         focus = [other.get_event().get_describe()]
-        nodes = agent.associate.retrieve_focus(focus, 5)  # 减少记忆数量
+        nodes = agent.associate.retrieve_focus(focus, 5) 
         
-        # 构建更详细的对话历史（包含中文翻译）
         if chats:
             conversation_lines = []
             for speaker_name, content in chats:
-                # content 可能是 novlang 或者包含翻译的格式
                 if isinstance(content, dict):
                     novlang = content.get("novlang", "")
-                    chinese = content.get("chinese", "")
+                    
+                    # [Modified] Only show Novlang, hide Chinese translation to force emergence
                     conversation_lines.append(f"{speaker_name}: {novlang}")
-                    if chinese:
-                        conversation_lines.append(f"  （含义：{chinese}）")
+                    
                 else:
                     conversation_lines.append(f"{speaker_name}: {content}")
             conversation = "\n".join(conversation_lines)

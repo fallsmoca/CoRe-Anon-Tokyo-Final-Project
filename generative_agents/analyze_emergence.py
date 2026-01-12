@@ -528,7 +528,7 @@ class LanguageEmergenceAnalyzer:
         # 3. 计算涌现指标 (简单版: 突增检测)
         # 定义: 在前 X 轮很少出现，但在后 Y 轮频繁出现
         log_func(f"\n🚀 潜在的涌现搭配 (Emerging Collocations):")
-        log_func(f"  (筛选标准: 前半程出现率 < 20% 且 后半程出现次数 >= 3)")
+        log_func(f"  (筛选标准: 后半程占比 > 75%)")
         
         sorted_rounds = sorted(tokens_per_round.keys())
         if len(sorted_rounds) < 2:
@@ -550,7 +550,8 @@ class LanguageEmergenceAnalyzer:
             # 简单指标: 后期占比
             late_ratio = count_late / total_count
             
-            if late_ratio > 0.8 and count_early <= 1: # 80% 以上出现在后半程，且前半程几乎没有
+            # [Modified] Removed strict filtering (early <= 1, count >= 3) as per user request
+            if late_ratio > 0.75: # 75% 以上出现在后半程
                 potential_emergence.append({
                     'gram': gram,
                     'count': total_count,
